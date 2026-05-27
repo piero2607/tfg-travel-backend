@@ -1,5 +1,6 @@
 package com.example.tfgtravelbackend.aplicacion.servicios;
 
+import com.example.tfgtravelbackend.dominio.puertos.entrada.ServicioReservaPuerto;
 import org.springframework.scheduling.annotation.Scheduled;
 import lombok.extern.slf4j.Slf4j;
 import com.example.tfgtravelbackend.dominio.modelo.Paquete;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class ServicioReserva {
+public class ServicioReserva implements ServicioReservaPuerto {
     @Autowired
     private RepositorioReserva repositorioReserva;
 

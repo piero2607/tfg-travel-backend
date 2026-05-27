@@ -1,5 +1,6 @@
 package com.example.tfgtravelbackend.aplicacion.servicios;
 import com.example.tfgtravelbackend.dominio.modelo.Paquete;
+import com.example.tfgtravelbackend.dominio.puertos.entrada.ServicioPaquetePuerto;
 import com.example.tfgtravelbackend.dominio.puertos.salida.RepositorioPaquete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ServicioPaquete {
+public class ServicioPaquete implements ServicioPaquetePuerto {
 
     @Autowired
     private RepositorioPaquete repositorioPaquete;
