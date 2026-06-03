@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/paquetes")
@@ -43,7 +44,7 @@ public class ControladorPaquete {
     }
 
     @PostMapping
-    public ResponseEntity<Paquete> crearPaquete(@RequestBody PaqueteDTO paqueteDTO) {
+    public ResponseEntity<Paquete> crearPaquete(@Valid @RequestBody PaqueteDTO paqueteDTO) {
         Paquete nuevoPaquete = servicioPaquete.crearPaquete(
                 paqueteDTO.getNombre(),
                 paqueteDTO.getDestino(),
@@ -57,7 +58,7 @@ public class ControladorPaquete {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Paquete> actualizarPaquete(@PathVariable String id, @RequestBody PaqueteDTO paqueteDTO) {
+    public ResponseEntity<Paquete> actualizarPaquete(@PathVariable String id,@Valid @RequestBody PaqueteDTO paqueteDTO) {
         Paquete paqueteActualizado = servicioPaquete.actualizarPaquete(
                 id,
                 paqueteDTO.getNombre(),
