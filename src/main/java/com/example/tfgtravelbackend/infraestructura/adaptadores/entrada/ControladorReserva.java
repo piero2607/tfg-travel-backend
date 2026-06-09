@@ -21,7 +21,10 @@ public class ControladorReserva {
         Reserva nuevaReserva = servicioReserva.crearReserva(
                 reservaDTO.getPaqueteId(),
                 reservaDTO.getClienteNombre(),
+                reservaDTO.getApellidos(),
                 reservaDTO.getClienteEmail(),
+                reservaDTO.getDocumento(),
+                reservaDTO.getTelefono(),
                 reservaDTO.getNumeroPersonas()
         );
         return new ResponseEntity<>(nuevaReserva, HttpStatus.CREATED);

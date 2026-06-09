@@ -23,24 +23,27 @@ public class ServicioReserva implements ServicioReservaPuerto {
     @Autowired
     private ServicioEmail servicioEmail;
 
-    public Reserva crearReserva(String paqueteId, String clienteNombre,String clienteEmail,int numeroPersonas){
-        Paquete paquete=repositorioPaquete.buscarPorId(paqueteId)
-                .orElseThrow(()-> new RuntimeException("Paquete no encontardo"));
+    public Reserva crearReserva(String paqueteId, String clienteNombre, String apellidos,
+                                String clienteEmail, String documento, String telefono,
+                                int numeroPersonas) {
+        Paquete paquete = repositorioPaquete.buscarPorId(paqueteId)
+                .orElseThrow(() -> new RuntimeException("Paquete no encontrado"));
 
-        if (paquete.getPlazasDisponibles()< numeroPersonas){
+        if (paquete.getPlazasDisponibles() < numeroPersonas) {
             throw new RuntimeException("No hay suficientes plazas disponibles");
         }
 
-        Double precioTotal=paquete.getPrecio()*numeroPersonas;
+        Double precioTotal = paquete.getPrecio() * numeroPersonas;
 
-        Reserva reserva=new Reserva(paqueteId,clienteNombre,clienteEmail,numeroPersonas,precioTotal);
+        Reserva reserva = new Reserva(paqueteId, clienteNombre, apellidos, clienteEmail,
+                documento, telefono, numeroPersonas, precioTotal);
 
         paquete.reducirPlazas(numeroPersonas);
         repositorioPaquete.guardar(paquete);
 
-        Reserva reservaGuardada=repositorioReserva.guardar(reserva);
+        Reserva reservaGuardada = repositorioReserva.guardar(reserva);
 
-        servicioEmail.enviarEmailConfirmacion(clienteEmail,clienteNombre,reservaGuardada);
+        servicioEmail.enviarEmailConfirmacion(clienteEmail, clienteNombre, reservaGuardada);
 
         return reservaGuardada;
     }

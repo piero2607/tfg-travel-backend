@@ -19,13 +19,13 @@ public class Paquete {
     private Double precio;
     private Integer duracionDias;
     private Integer plazasDisponibles;
-    private String urlimagen;
+    private String urlImagen;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaActualizacion;
 
     public Paquete(String nombre, String destino, String descripcion,
                    Double precio, Integer duracionDias, Integer plazasDisponibles,
-                   String urlimagen, LocalDateTime fechaCreacion,
+                   String urlImagen, LocalDateTime fechaCreacion,
                    LocalDateTime fechaActualizacion) {
         this.nombre = nombre;
         this.destino = destino;
@@ -33,12 +33,21 @@ public class Paquete {
         this.precio = precio;
         this.duracionDias = duracionDias;
         this.plazasDisponibles = plazasDisponibles;
-        this.urlimagen = urlimagen;
+        this.urlImagen = urlImagen;
         this.fechaCreacion = fechaCreacion;
         this.fechaActualizacion = fechaActualizacion;
     }
 
     public Paquete(String nombre, String destino, String descripcion, Double precio, Integer duracionDias, Integer plazasDisponibles, String urlImagen) {
+        this.nombre = nombre;
+        this.destino = destino;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.duracionDias = duracionDias;
+        this.plazasDisponibles = plazasDisponibles;
+        this.urlImagen = urlImagen;
+        this.fechaCreacion = LocalDateTime.now();
+        this.fechaActualizacion = LocalDateTime.now();
     }
 
     public void reducirPlazas(int cantidad){

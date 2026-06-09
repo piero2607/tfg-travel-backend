@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ServicioPaquete implements ServicioPaquetePuerto {
@@ -48,7 +49,7 @@ public class ServicioPaquete implements ServicioPaquetePuerto {
         paqueteExistente.setPrecio(precio);
         paqueteExistente.setDuracionDias(duracionDias);
         paqueteExistente.setPlazasDisponibles(plazasDisponibles);
-        paqueteExistente.setUrlimagen(urlImagen);
+        paqueteExistente.setUrlImagen(urlImagen);
 
         return repositorioPaquete.guardar(paqueteExistente);
     }
@@ -57,11 +58,12 @@ public class ServicioPaquete implements ServicioPaquetePuerto {
         repositorioPaquete.buscarPorId(id).orElseThrow(()->new RuntimeException("Paquete no encontrado con Id: " +id));
         repositorioPaquete.eliminarPorId(id);
     }
-    public List<Paquete> buscarPorDestino(String destino){
-        if (destino==null||destino.isEmpty()){
+    public List<Paquete> buscarPorDestino(String destino) {
+        if (destino == null || destino.isEmpty()) {
             return repositorioPaquete.obtenerTodos();
-        }
-        return repositorioPaquete.buscarPorDestino(destino);
+        }return repositorioPaquete.obtenerTodos().stream()
+                .filter(p -> p.getDestino().toLowerCase().contains(destino.toLowerCase()))
+                .collect(Collectors.toList());
     }
 
     public List<Paquete> buscarPorPrecioMaximo(Double precioMaximo){
